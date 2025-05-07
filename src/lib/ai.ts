@@ -39,3 +39,10 @@ const image_prompt = ChatPromptTemplate.fromMessages([
 
 // Create the chain for image analysis
 export const image_message = image_prompt.pipe(model).pipe(parser);
+
+export async function get_chat_response(history: [string, string][]) {
+	const prompt = ChatPromptTemplate.fromMessages(history);
+	const chat = prompt.pipe(model).pipe(parser);
+
+	return await chat.invoke({});
+}
